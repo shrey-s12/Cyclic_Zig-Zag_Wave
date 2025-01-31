@@ -1,32 +1,30 @@
 import React from "react";
 
 function Table() {
-    const gridSize = 1000; // Set your desired grid size
+    const gridSize = 1000;
     const numbers = Array.from({ length: gridSize }, (_, i) => i + 1);
 
     return (
-        <div className="grid grid-cols-10 gap-2 p-4 w-fit mx-auto">
+        <div className="grid grid-cols-10 gap-1 p-4 w-fit mx-auto bg-black rounded-lg">
             {numbers.map((num) => {
                 let isBlue = false;
 
                 const cycle = Math.floor((num - 1) / 180);
-                const cycleStart = cycle * 180 + 1; // 1st number of the current cycle
-                const localNum = num - cycleStart + 1; // Position inside the cycle
+                const cycleStart = cycle * 180 + 1;
+                const localNum = num - cycleStart + 1;
 
-                // Phase 1: +11 pattern from 1 to 100 (inside the cycle)
                 if (localNum <= 100) {
                     isBlue = (localNum - 1) % 11 === 0;
-                }
-                // Phase 2: +9 pattern from 109 to 181 (inside the cycle)
-                else if (localNum > 100 && localNum < 181) {
+                } else if (localNum > 100 && localNum < 181) {
                     isBlue = (localNum - 100) % 9 === 0;
                 }
 
                 return (
                     <div
                         key={num}
-                        className={`border p-2 text-center w-10 h-10 flex items-center justify-center 
-                            ${isBlue ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+                        className={`w-12 h-12 flex items-center justify-center rounded-md text-lg font-bold 
+                            transition-all duration-200
+                            ${isBlue ? "bg-blue-500 text-white shadow-lg shadow-blue-500/50" : "bg-gray-900 text-gray-300 border border-gray-700"}`}
                     >
                         {num}
                     </div>
